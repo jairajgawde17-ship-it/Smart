@@ -1,104 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Important Question 🤔</title>
+<meta charset="UTF-8" />
+<title>Important Question 😎</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ffe3f1, #ffd1dc);
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:sans-serif;
+  background:linear-gradient(135deg,#ffd6e0,#ffeaf5);
+  overflow:hidden;
+}
 
-    .card {
-      background: white;
-      padding: 50px 60px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      position: relative;
-      min-width: 350px;
-    }
+.card{
+  background:white;
+  padding:50px;
+  border-radius:20px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  width:320px;
+}
 
-    h2 {
-      margin-bottom: 40px;
-      font-size: 22px;
-    }
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+  cursor:pointer;
+  position:absolute;
+  transition:0.15s;
+}
 
-    button {
-      padding: 12px 28px;
-      font-size: 18px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      transition: 0.15s;
-    }
+#yes{
+  background:#ff4da6;
+  color:white;
+  left:40px;
+  bottom:20px;
+}
 
-    #yes {
-      background: #ff4da6;
-      color: white;
-      left: 60px;
-      bottom: 25px;
-    }
-
-    #no {
-      background: #ddd;
-      right: 60px;
-      bottom: 25px;
-    }
-  </style>
+#no{
+  background:#ddd;
+  right:40px;
+  bottom:20px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h2>Do you think Jairaj is the smartest person? 🧠✨</h2>
+<div class="card" id="card">
+  <h2>Do you think Jairaj is the smartest person? 😎</h2>
+  <button id="yes">Yes 😁</button>
+  <button id="no">No 😅</button>
+</div>
 
-    <button id="yes">Yes 😎</button>
-    <button id="no">No 🙃</button>
-  </div>
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const card = document.getElementById("card");
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const card = document.querySelector(".card");
+const SAFE_DISTANCE = 80;
 
-    // Run away effect
-    noBtn.addEventListener("mouseover", () => {
-      const maxX = card.clientWidth - noBtn.clientWidth;
-      const maxY = card.clientHeight - noBtn.clientHeight;
+// 🔥 No runs away
+document.addEventListener("mousemove", (e) => {
 
-      const randX = Math.random() * maxX;
-      const randY = Math.random() * maxY;
+  const rect = noBtn.getBoundingClientRect();
+  const dx = e.clientX - (rect.left + rect.width/2);
+  const dy = e.clientY - (rect.top + rect.height/2);
 
-      noBtn.style.left = randX + "px";
-      noBtn.style.top = randY + "px";
-    });
+  const distance = Math.sqrt(dx*dx + dy*dy);
 
-    // Yes click effect
-    document.getElementById("yes").onclick = () => {
-      document.body.innerHTML = `
-        <div style="
-          height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          font-size:32px;
-          font-weight:bold;
-          background:#ff4da6;
-          color:white;
-        ">
-          Correct answer 😌🔥
-        </div>
-      `;
-    };
-  </script>
+  if(distance < SAFE_DISTANCE){
+    const maxX = card.clientWidth - noBtn.clientWidth;
+    const maxY = card.clientHeight - noBtn.clientHeight;
+
+    noBtn.style.left = Math.random()*maxX + "px";
+    noBtn.style.top = Math.random()*maxY + "px";
+  }
+});
+
+
+// 🎉 YES CLICK → SHOW GIF
+yesBtn.onclick = () => {
+
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:#ff4da6;
+      color:white;
+      font-size:28px;
+      text-align:center;
+      gap:20px;
+    ">
+      <h1>Correct Answer 🔥😎</h1>
+
+      <img 
+        src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif"
+        style="width:280px;border-radius:12px;"
+      >
+    </div>
+  `;
+};
+</script>
 
 </body>
 </html>
