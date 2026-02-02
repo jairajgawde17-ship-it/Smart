@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hehe 😎</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:sans-serif;
+  background:#ffeaf5;
+  overflow:hidden;
+}
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:15px;
+  text-align:center;
+  position:relative;
+  width:300px;
+}
+
+button{
+  position:absolute;
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+#yes{
+  left:40px;
+  bottom:20px;
+  background:#ff4da6;
+  color:white;
+}
+
+#no{
+  right:40px;
+  bottom:20px;
+  background:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h3>Do you think Jairaj is the smartest person? 😎</h3>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const card = document.getElementById("card");
+
+// ONLY movement logic (no scaling, no tricks)
+noBtn.addEventListener("mouseenter", () => {
+
+  const maxX = card.clientWidth - noBtn.clientWidth;
+  const maxY = card.clientHeight - noBtn.clientHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+// YES → show gif
+document.getElementById("yes").onclick = () => {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#ff4da6;">
+      <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif"
+           style="width:300px;border-radius:12px;">
+    </div>
+  `;
+};
+</script>
+
+</body>
+</html>
